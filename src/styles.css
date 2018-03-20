@@ -1,0 +1,32 @@
+body {
+  background-image: url(https://thumbs.gfycat.com/SlimyClassicAsianconstablebutterfly-max-1mb.gif);
+  background-size: cover;
+  color: white;
+}
+
+.jumbotron {
+  background-color: inherit;
+  text-align: center;
+  font-size: 50px;
+  color: white;
+}
+
+.btn {
+  background-color: #FCE778;
+  color: black;
+}
+
+#star-img, #wars-img {
+  display: block;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#star-img {
+  margin-bottom: -25px;
+}
+
+#wars-img {
+  margin-top: -15px;
+}
