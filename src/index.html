@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <meta charset="utf-8">
     <title>Star Wars</title>
   </head>
   <body>
-    <form id="form">
-      <input id="searchTerm" type="text">
-      <select id="typeSelect">
-        <option selected="selected" value="people">People</option>
-        <option value="starships">Star Ships</option>
-        <option value="planets">Planets</option>
-      </select>
-      <button type="submit" name="button">Submit</button>
-    </form>
-    <h2 id="typeDisplay"></h2>
-    <ul id="name">
-
-    </ul>
-    <h1 id="error"></h1>
+    <div class="container">
+      <form id="form">
+        <div class="form-group">
+          <label for="searchTerm">Search Here</label>
+          <input class="form-control" id="searchTerm" type="text">
+        </div>
+        <div class="form-group">
+          <label for="typeSelect">Select Type</label>
+          <select class="form-control" id="typeSelect">
+            <option selected="selected" value="people">People</option>
+            <option value="starships">Star Ships</option>
+            <option value="planets">Planets</option>
+            <option value="vehicles">Vehicles</option>
+          </select>
+        </div>
+        <button type="submit" name="button">Submit</button>
+      </form>
+      <h2 id="typeDisplay"></h2>
+      <ul id="name">
+      </ul>
+      <h1 id="error"></h1>
+    </div>
   </body>
 </html>
