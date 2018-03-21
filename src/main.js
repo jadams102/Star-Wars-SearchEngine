@@ -1,6 +1,13 @@
 import $ from 'jquery';
 import './styles.css';
 
+function RandomGif() {
+  let num = Math.floor(Math.random() * 5);
+  return num;
+}
+
+const GiphyKey = process.env.GIPHY_KEY
+console.log(GiphyKey)
 
 $(document).ready(function(){
   $('#form').submit(function(event){
@@ -24,14 +31,14 @@ $(document).ready(function(){
             $('#typeDisplay').text("Starship");
             for (let i = 0; i < response.results.length; i++) {
               $.ajax({
-                url: 'https://api.giphy.com/v1/gifs/search?api_key=ahj6m5vgcAHoX6r8YtmjE6MeVC316HCc&q=' + response.results[i].name + '&limit=1',
+                url: 'https://api.giphy.com/v1/gifs/search?api_key=' + GiphyKey + '&q=' + response.results[i].name + '&limit=5',
                 type: 'GET',
                 data: {
                   format: 'json'
                 },
                 success: function(gif) {
                   console.log(gif);
-                  $('ul#name').append('<li><img src=" '+ gif.data[0].images.fixed_height.url +' ">' + "<br>Name: " + response.results[i].name + "<br> Model: " + response.results[i].model + "<br> Manufacturer: " + response.results[i].manufacturer + "<br> Cost (In Credits): " + response.results[i].cost_in_credits + "</li> <hr>");
+                  $('ul#name').append('<li><img src=" '+ gif.data[RandomGif()].images.fixed_height.url +' ">' + "<br>Name: " + response.results[i].name + "<br> Model: " + response.results[i].model + "<br> Manufacturer: " + response.results[i].manufacturer + "<br> Cost (In Credits): " + response.results[i].cost_in_credits + "</li> <hr>");
                 },
                 error: function() {
                   $('#error').text("error");
@@ -61,7 +68,20 @@ $(document).ready(function(){
                       format: 'json'
                     },
                     success: function(species) {
-                      $('ul#name').append("<li> Name: " + response.results[j].name + "<br> Hair Color: " + response.results[j].hair_color + "<br> Mass: " + response.results[j].mass + "<br> Gender: " + response.results[j].gender + "<br> Height: " + response.results[j].height + "cm <br> Homeworld: " + homeworld.name + "<br> Species: " + species.name + "</li><hr>");
+                      $.ajax({
+                        url: 'https://api.giphy.com/v1/gifs/search?api_key=' + GiphyKey + '&q=' + response.results[j].name + '&limit=5',
+                        type: 'GET',
+                        data: {
+                          format: 'json'
+                        },
+                        success: function(gif) {
+                          $('ul#name').append('<li><img src=" '+ gif.data[RandomGif()].images.fixed_height.url +' ">' + "<br>Name: " +  response.results[j].name + "<br> Hair Color: " + response.results[j].hair_color + "<br> Mass: " + response.results[j].mass + "<br> Gender: " + response.results[j].gender + "<br> Height: " + response.results[j].height + "cm <br> Homeworld: " + homeworld.name + "<br> Species: " + species.name + "</li><hr>");
+                        },
+                        error: function() {
+                          $('#error').text("error");
+                        }
+                      })
+
                     },
                     error: function(){
                       $('#error').text("Oh geez");
@@ -88,7 +108,19 @@ $(document).ready(function(){
                   format: 'json'
                 },
                 success: function(residents) {
-                  $('ul#name').append("<li> Name: " + response.results[k].name + "<br> Climate: " + response.results[k].climate + "<br> Gravity: " + response.results[k].gravity + "<br> Population: " + response.results[k].population + "<br> Terrain: " + response.results[k].terrain + "<br> Famous Known Resident: " + residents.name + "</li> <hr>");
+                  $.ajax({
+                    url: 'https://api.giphy.com/v1/gifs/search?api_key=' + GiphyKey + '&q=' + response.results[k].name + '&limit=5',
+                    type: 'GET',
+                    data: {
+                      format: 'json'
+                    },
+                    success: function(gif) {
+                      $('ul#name').append('<li><img src=" '+ gif.data[RandomGif()].images.fixed_height.url +' ">' + "<br>Name: " + response.results[k].name + "<br> Climate: " + response.results[k].climate + "<br> Gravity: " + response.results[k].gravity + "<br> Population: " + response.results[k].population + "<br> Terrain: " + response.results[k].terrain + "<br> Famous Known Resident: " + residents.name + "</li> <hr>");
+                    },
+                    error: function() {
+                      $('#error').text("error");
+                    }
+                  })
                 },
                 error: function(){
                   $('#error').text("Oh geez");
@@ -102,7 +134,19 @@ $(document).ready(function(){
           } else {
             $('#typeDisplay').text("Vehicle");
             for (let l = 0; l < response.results.length; l++) {
-                $('ul#name').append("<li> Name: " + response.results[l].name + "<br> Model: " + response.results[l].model + "<br> Manufacturer: " + response.results[l].manufacturer + "<br> Cost (In Credits): " + response.results[l].cost_in_credits + "<br> Vehicle Class: " + response.results[l].vehicle_class + "</li> <hr>");
+              $.ajax({
+                url: 'https://api.giphy.com/v1/gifs/search?api_key=' + GiphyKey + '&q=' + response.results[l].name + '&limit=5',
+                type: 'GET',
+                data: {
+                  format: 'json'
+                },
+                success: function(gif) {
+                  $('ul#name').append('<li><img src=" '+ gif.data[RandomGif()].images.fixed_height.url +' ">' + "<br>Name: " + response.results[l].name + "<br> Model: " + response.results[l].model + "<br> Manufacturer: " + response.results[l].manufacturer + "<br> Cost (In Credits): " + response.results[l].cost_in_credits + "<br> Vehicle Class: " + response.results[l].vehicle_class + "</li> <hr>");
+                },
+                error: function() {
+                  $('#error').text("error");
+                }
+              })
               }
             }
           } else if (type === "species") {
@@ -125,7 +169,19 @@ $(document).ready(function(){
                         format: 'json'
                       },
                       success: function(person) {
-                        $('ul#name').append("<li> Name: " + response.results[m].name + "<br> Classification: " + response.results[m].classification + "<br> Homeworld: " + homeworld.name + "<br> Language: " + response.results[m].language + "<br> Famous Member of Species: " + person.name +  "</li><hr>");
+                        $.ajax({
+                          url: 'https://api.giphy.com/v1/gifs/search?api_key=' + GiphyKey + '&q=' + response.results[m].name + '&limit=5',
+                          type: 'GET',
+                          data: {
+                            format: 'json'
+                          },
+                          success: function(gif) {
+                            $('ul#name').append('<li><img src=" '+ gif.data[RandomGif()].images.fixed_height.url +' ">' + "<br>Name: " + response.results[m].name + "<br> Classification: " + response.results[m].classification + "<br> Homeworld: " + homeworld.name + "<br> Language: " + response.results[m].language + "<br> Famous Member of Species: " + person.name +  "</li><hr>");
+                          },
+                          error: function() {
+                            $('#error').text("error");
+                          }
+                        })
                       },
                       error: function(){
                         $('#error').text("OH SHIT");
