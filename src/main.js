@@ -23,7 +23,20 @@ $(document).ready(function(){
           } else {
             $('#typeDisplay').text("Starship");
             for (let i = 0; i < response.results.length; i++) {
-              $('ul#name').append("<li> Name: " + response.results[i].name + "<br> Model: " + response.results[i].model + "<br> Manufacturer: " + response.results[i].manufacturer + "<br> Cost (In Credits): " + response.results[i].cost_in_credits + "</li> <hr>");
+              $.ajax({
+                url: 'https://api.giphy.com/v1/gifs/search?api_key=ahj6m5vgcAHoX6r8YtmjE6MeVC316HCc&q=' + response.results[i].name + '&limit=1',
+                type: 'GET',
+                data: {
+                  format: 'json'
+                },
+                success: function(gif) {
+                  console.log(gif);
+                  $('ul#name').append('<li><img src=" '+ gif.data[0].images.fixed_height.url +' ">' + "<br>Name: " + response.results[i].name + "<br> Model: " + response.results[i].model + "<br> Manufacturer: " + response.results[i].manufacturer + "<br> Cost (In Credits): " + response.results[i].cost_in_credits + "</li> <hr>");
+                },
+                error: function() {
+                  $('#error').text("error");
+                }
+              })
             }
           }
 
